@@ -1,0 +1,3 @@
+﻿  game.cpp
+c:\users\brian\desktop\project3-brian-alex\box2d tests\empty sfml game\game.cpp(89): warning C4305: 'argument': truncation from 'double' to 'float'
+  Empty SFML game.vcxproj -> C:\Users\Brian\Desktop\project3-brian-alex\Box2D tests\Debug\Empty SFML game.exe
