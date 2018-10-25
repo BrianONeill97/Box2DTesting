@@ -1,19 +1,8 @@
-#pragma once
-// Author = Brian O'Neill
-// Date = 15/10/2017
-//Student number = C00213756
-// Time taken = 4 hours
-//Known Issues = Text is only drawn to screen one for a few seconds then disappears and does not redraw
-//					also controller is connected text is commented out as when it is not it is constantly output
 #ifndef GAME
 #define GAME
 
-
-
 #include <SFML/Graphics.hpp>
 #include "Box2D/Box2D.h"
-
-
 
 class Game
 {
@@ -42,13 +31,20 @@ private:
 	sf::Sprite ballSprite;
 	sf::Sprite ground;
 
+	
 	void createSprite();
+	sf::Vector2f sPos = { 200,200 };
+
 	void createGround();
+
+	
 
 	//Box2D
 	void createBody();
-	b2Vec2 gravity;
-	b2World *world;
+
+
+	//Update Player
+	void updatePlayer(b2World worldR);
 
 	
 
@@ -56,7 +52,7 @@ private:
 	 const float SCALE = 30.f;
 
 	/** Create the base for the boxes to land */
-	void CreateGround(b2World& World, float X, float Y);
+	void createGroundBox(b2World& World, float X, float Y);
 
 	/** Create the boxes */
 	void CreateBox(b2World& World, int MouseX, int MouseY);

@@ -1,11 +1,13 @@
 #include "game.h" 
 #include <iostream> 
 
+b2Vec2 Gravity(0.f, 9.8f);
+b2World World(Gravity);
+
 Game::Game()
-	: m_window{ sf::VideoMode{ 800, 600 }, "SFML" }		
+	: m_window{ sf::VideoMode{ 1200, 800 }, "SFML" }		
 {
-	gravity = { 0.f, 9.8f };
-	this->world = new b2World(gravity);
+
 
 
 	CircleTexture.loadFromFile("ball.png");
@@ -13,6 +15,14 @@ Game::Game()
 
 	GroundTexture.loadFromFile("ground.png");
 
+
+	createSprite();
+	createBody();
+	createGround();
+
+	createGroundBox(World, 0, 500);
+
+	
 
 }
 
@@ -31,6 +41,7 @@ void Game::run()
 			timeSinceLastUpdate -= timePerFrame;
 			processEvents();
 			update(timePerFrame);
+			World.DrawDebugData();
 		}
 		render();
 	}
@@ -56,10 +67,12 @@ void Game::processEvents()
 
 void Game::update(sf::Time)
 {
-	createSprite();
-	createBody();
-	createGround();
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	{
+		CreateBox(World, sPos.x, sPos.y);
+	}
 	
+	World.Step(1 / 60.f,8,3);
 }
 
 void Game::render()
@@ -70,15 +83,16 @@ void Game::render()
 
 	m_window.draw(ground);
 
-
+	
 	m_window.display();
 }
 
 void Game::createSprite()
 {
 	ballSprite.setTexture(CircleTexture);
-	ballSprite.setOrigin(16.f, 16.f);
-	ballSprite.setPosition(200,200);
+	ballSprite.setOrigin(97.5f, 97.5f);
+	ballSprite.scale(0.4, 0.4);
+	ballSprite.setPosition(sPos.x,sPos.y);
 
 }
 
@@ -95,10 +109,39 @@ void Game::createBody()
 
 }
 
-void Game::CreateGround(b2World & World, float X, float Y)
+void Game::updatePlayer(b2World worldR)
 {
 }
 
-void Game::CreateBox(b2World & World, int MouseX, int MouseY)
+void Game::createGroundBox(b2World & World, float X, float Y)
 {
+	b2BodyDef BodyDef;
+	BodyDef.position = b2Vec2(X / SCALE, Y / SCALE);
+	BodyDef.type = b2_staticBody; // so its not effected by forces
+	b2Body* body = World.CreateBody(&BodyDef);
+
+
+	b2PolygonShape Shape;
+	Shape.SetAsBox((1200.f / 2) / SCALE, (16.f / 2) / SCALE);
+	b2FixtureDef fixtureDef;
+	fixtureDef.density = 0.f;
+	fixtureDef.shape = &Shape;
+	body->CreateFixture(&fixtureDef);
+	
+}
+
+void Game::CreateBox(b2World & World, int X, int Y)
+{
+	b2BodyDef BodyDef;
+	BodyDef.position = b2Vec2(X / SCALE, Y / SCALE);
+	BodyDef.type = b2_dynamicBody;
+	b2Body* Body = World.CreateBody(&BodyDef);
+
+	b2PolygonShape Shape;
+	Shape.SetAsBox((32.f / 2) / SCALE, (32.f / 2) / SCALE);
+	b2FixtureDef FixtureDef;
+	FixtureDef.density = 1.f;
+	FixtureDef.friction = 0.7f;
+	FixtureDef.shape = &Shape;
+	Body->CreateFixture(&FixtureDef);
 }
