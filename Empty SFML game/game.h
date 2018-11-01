@@ -26,12 +26,14 @@ private:
 	sf::Sprite m_sprite;
 	//font for the text
 	sf::Font m_font;
+	//EVENT
+	sf::Event event;
 
 	//Sprites
 	sf::Texture GroundTexture;
-	sf::Texture CircleTexture;
+	sf::Texture boxTexture;
 
-	sf::Sprite ballSprite;
+	sf::Sprite boxSprite;
 	sf::Sprite ground;
 
 
@@ -54,6 +56,9 @@ private:
 	 b2PolygonShape shape;
 	 b2FixtureDef fixtureDef;
 
+	 int m_jumpTimer;
+	 bool jumped;
+
 	 //Ground
 	 b2BodyDef groundDef;
 	 b2Body* groundBody;
@@ -67,6 +72,11 @@ private:
 
 	 void createGround();
 	 void groundBox();
+
+	 //Movement 
+	 void moveRight(b2Body *body);
+	 void moveLeft(b2Body *body);
+	 void moveUp(b2Body *body);
 
 
 
