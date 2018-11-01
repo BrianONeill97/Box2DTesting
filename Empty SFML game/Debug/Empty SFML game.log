@@ -1,9 +1,6 @@
 ﻿  game.cpp
-c:\users\brian\desktop\box2dtesting\empty sfml game\game.cpp(72): warning C4244: 'argument': conversion from 'T' to 'int', possible loss of data
-          with
-          [
-              T=float
-          ]
-c:\users\brian\desktop\box2dtesting\empty sfml game\game.cpp(94): warning C4305: 'argument': truncation from 'double' to 'float'
-c:\users\brian\desktop\box2dtesting\empty sfml game\game.cpp(103): warning C4305: 'argument': truncation from 'double' to 'float'
+c:\users\brian\desktop\box2dtesting\empty sfml game\game.h(44): warning C4305: 'initializing': truncation from 'double' to 'float32'
+  main.cpp
+c:\users\brian\desktop\box2dtesting\empty sfml game\game.h(44): warning C4305: 'initializing': truncation from 'double' to 'float32'
+  Generating Code...
   Empty SFML game.vcxproj -> C:\Users\Brian\Desktop\Box2DTesting\Debug\Empty SFML game.exe

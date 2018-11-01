@@ -1,8 +1,11 @@
 #ifndef GAME
 #define GAME
 
-#include <SFML/Graphics.hpp>
+
 #include "Box2D/Box2D.h"
+#include "SFML/Graphics.hpp"
+#include "b2GLDraw.h"
+#include <iostream>
 
 class Game
 {
@@ -31,34 +34,44 @@ private:
 	sf::Sprite ballSprite;
 	sf::Sprite ground;
 
-	
-	void createSprite();
-	sf::Vector2f sPos = { 200,200 };
 
-	void createGround();
-
-	
-
-	//Box2D
-	void createBody();
-
-
-	//Update Player
-	void updatePlayer(b2World worldR);
-
-	
 
 	/** We need this to easily convert between pixel and real-world coordinates*/
 	 const float SCALE = 30.f;
 
-	/** Create the base for the boxes to land */
-	void createGroundBox(b2World& World, float X, float Y);
+	 //World
 
-	/** Create the boxes */
-	void CreateBox(b2World& World, int MouseX, int MouseY);
+	 float32 timeStep = 1 / 60.0;      //the length of time passed to simulate (seconds)
+	 int32 velocityIterations = 8;   //how strongly to correct velocity
+	 int32 positionIterations = 3;   //how strongly to correct position
+
+
+	 
+	 
+	 //Player
+	 b2BodyDef bodyDef;
+	 b2Body* playerBody;
+	 b2PolygonShape shape;
+	 b2FixtureDef fixtureDef;
+
+	 //Ground
+	 b2BodyDef groundDef;
+	 b2Body* groundBody;
+	 b2PolygonShape groundShape;
+	 b2FixtureDef groundFixtureDef;
+
+	 void createBoxPlayer();
+	 void createSprite();
+
+	 void updateSprite();
+
+	 void createGround();
+	 void groundBox();
+
+
 
 
 };
+#endif
 
-#endif // !GAME
 
