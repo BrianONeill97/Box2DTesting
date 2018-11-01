@@ -20,6 +20,7 @@ Game::Game()
 	}
 
 	createBoxPlayer();
+	groundBox();
 	createSprite();
 	createGround();
 
@@ -113,7 +114,7 @@ void Game::createBoxPlayer()
 	bodyDef.type = b2_dynamicBody;
 	playerBody = world.CreateBody(&bodyDef);
 
-	shape.SetAsBox((500.0f / 2) / SCALE, (500.0f / 2) / SCALE);
+	shape.SetAsBox((97.5f / 2) / SCALE, (97.5f / 2) / SCALE);
 	fixtureDef.density = 1.0f;
 	fixtureDef.friction = 0.7f;
 	fixtureDef.shape = &shape;
@@ -124,11 +125,11 @@ void Game::createBoxPlayer()
 
 void Game::groundBox()
 {
-	groundDef.position = b2Vec2(0, 320);
+	groundDef.position = b2Vec2(240, 400);
 	groundDef.type = b2_staticBody;
 	groundBody = world.CreateBody(&groundDef);
 
-	groundShape.SetAsBox((1000.0f / 2) / SCALE, (100.0f / 2) / SCALE);
+	groundShape.SetAsBox((320.0f / 2) / SCALE, (240.0f / 2) / SCALE);
 	groundFixtureDef.density = 1.0f;
 	groundFixtureDef.friction = 0.7f;
 	groundFixtureDef.shape = &groundShape;
@@ -138,8 +139,8 @@ void Game::groundBox()
 void Game::createSprite()
 {
 	m_sprite.setTexture(CircleTexture);
-	m_sprite.setOrigin(8.f, 8.0f);
-	m_sprite.scale(0.5, 0.5);
+	m_sprite.setOrigin(97.5f, 97.5f);
+	//m_sprite.scale(0.5, 0.5);
 	m_sprite.setPosition(playerBody->GetPosition().x, playerBody->GetPosition().y);
 }
 
@@ -151,8 +152,10 @@ void Game::updateSprite()
 
 void Game::createGround()
 {
+
 	ground.setTexture(GroundTexture);
-//	ground.setPosition(groundBody->GetPosition().x, groundBody->GetPosition().y);
+	ground.setOrigin(320.f, 240.0f);
+	ground.setPosition(groundBody->GetPosition().x, groundBody->GetPosition().y);
 }
 
 
