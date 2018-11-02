@@ -1,8 +1,6 @@
 #include "game.h" 
 
 
-b2Vec2 gravity = { 0.0f,9.8f };
-b2World world(gravity);
 
 Game::Game()
 	: m_window{ sf::VideoMode{ 1200, 800 }, "SFML" }		
@@ -10,8 +8,7 @@ Game::Game()
 	m_jumpTimer = 0;
 
 
-	b2Vec2 gravity = { 0.0f,9.8f };
-	b2World world(gravity);
+
 	
 	boxTexture.loadFromFile("box.png");
 	GroundTexture.loadFromFile("ground.png");
@@ -26,7 +23,6 @@ Game::Game()
 	createSprite();
 	createGround();
 
-	b2GLDraw fooDrawInstance;
 	world.SetDebugDraw(&fooDrawInstance);
 	uint32 flags = 0;
 	flags += b2Draw::e_shapeBit;
@@ -45,8 +41,6 @@ void Game::run()
 	sf::Time timePerFrame = sf::seconds(1.f / 60.f);
 	while (m_window.isOpen())
 	{
-		loadContent();
-		processEvents();
 		timeSinceLastUpdate += clock.restart();
 		while (timeSinceLastUpdate > timePerFrame)
 		{

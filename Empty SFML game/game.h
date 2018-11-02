@@ -18,7 +18,7 @@ private:
 	void             update(sf::Time);
 	void             render();
 
-	
+
 private:
 	sf::RenderWindow m_window;
 	//texture for the screen
@@ -39,14 +39,19 @@ private:
 
 
 	/** We need this to easily convert between pixel and real-world coordinates*/
-	 const float SCALE = 30.f;
+	const float SCALE = 30.f;
 
-	 //World
+	//World
+
+
+	b2Vec2 gravity = { 0.0f,9.8f };
+	b2World world{gravity};
 
 	 float32 timeStep = 1 / 60.0;      //the length of time passed to simulate (seconds)
 	 int32 velocityIterations = 8;   //how strongly to correct velocity
 	 int32 positionIterations = 3;   //how strongly to correct position
 
+	 b2GLDraw fooDrawInstance;
 
 	 
 	 
