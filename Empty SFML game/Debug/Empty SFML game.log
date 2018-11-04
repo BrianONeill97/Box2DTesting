@@ -1,3 +1,4 @@
-﻿  Player.cpp
-c:\users\brian\desktop\box2dtesting\empty sfml game\player.h(34): warning C4305: 'argument': truncation from 'double' to 'float32'
+﻿  PendulumTrap.cpp
+c:\users\brian\desktop\box2dtesting\empty sfml game\pendulumtrap.cpp(55): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
+c:\users\brian\desktop\box2dtesting\empty sfml game\pendulumtrap.cpp(60): warning C4244: 'argument': conversion from 'double' to 'float32', possible loss of data
   Empty SFML game.vcxproj -> C:\Users\Brian\Desktop\Box2DTesting\Debug\Empty SFML game.exe

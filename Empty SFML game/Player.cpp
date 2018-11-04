@@ -21,7 +21,7 @@ void Player::createBoxPlayer(b2World  &world)
 	//************
 //When dividing the SetAsBox by scale you MUST multiply GetPosition() by SCALE
 //************
-	bodyDef.position = b2Vec2(300 / SCALE, 500 / SCALE);
+	bodyDef.position = b2Vec2(300 / SCALE, 600 / SCALE);
 	bodyDef.type = b2_dynamicBody;
 	playerBody = world.CreateBody(&bodyDef);
 

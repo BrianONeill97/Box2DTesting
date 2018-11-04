@@ -10,6 +10,10 @@ Game::Game()
 
 	player.createBoxPlayer(world);
 	player.createSprite();
+
+	PendulumTrap();
+	pend.createBoxPend(world);
+	pend.createSprite();
 	
 
 	GroundTexture.loadFromFile("ground.png");
@@ -70,6 +74,8 @@ void Game::update(sf::Time)
 {
 	world.Step(timeStep, velocityIterations, positionIterations);
 	player.updateSprite();
+	pend.updateSprite();
+
 }
 
 void Game::render()
@@ -78,7 +84,10 @@ void Game::render()
 
 	m_window.draw(ground);
 
+
 	player.render(m_window);
+
+	pend.render(m_window);
 
 	world.DrawDebugData();
 

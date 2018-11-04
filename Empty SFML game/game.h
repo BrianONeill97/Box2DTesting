@@ -7,6 +7,7 @@
 #include "b2GLDraw.h"
 #include <iostream>
 #include "Player.h"
+#include "PendulumTrap.h"
 
 class Game
 {
@@ -35,6 +36,7 @@ private:
 
 
 	Player player;
+	PendulumTrap pend;
 	
 
 	/** We need this to easily convert between pixel and real-world coordinates*/
