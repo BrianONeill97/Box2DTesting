@@ -1,5 +1,3 @@
-﻿  game.cpp
-c:\users\brian\desktop\box2dtesting\empty sfml game\game.h(50): warning C4305: 'initializing': truncation from 'double' to 'float32'
-c:\users\brian\desktop\box2dtesting\empty sfml game\game.cpp(193): warning C4305: 'argument': truncation from 'double' to 'float32'
-c:\users\brian\desktop\box2dtesting\empty sfml game\game.cpp(198): warning C4305: 'argument': truncation from 'double' to 'float32'
+﻿  Player.cpp
+c:\users\brian\desktop\box2dtesting\empty sfml game\player.h(34): warning C4305: 'argument': truncation from 'double' to 'float32'
   Empty SFML game.vcxproj -> C:\Users\Brian\Desktop\Box2DTesting\Debug\Empty SFML game.exe

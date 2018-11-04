@@ -5,22 +5,17 @@
 Game::Game()
 	: m_window{ sf::VideoMode{ 1200, 800 }, "SFML" }		
 {
-	m_jumpTimer = 0;
 
+	Player();
 
-
+	player.createBoxPlayer(world);
+	player.createSprite();
 	
-	boxTexture.loadFromFile("box.png");
+
 	GroundTexture.loadFromFile("ground.png");
 
-	if (!GroundTexture.loadFromFile("ground.png"))
-	{
-		std::cout << "error loading from file ";
-	}
 
-	createBoxPlayer();
 	groundBox();
-	createSprite();
 	createGround();
 
 	world.SetDebugDraw(&fooDrawInstance);
@@ -74,42 +69,7 @@ void Game::processEvents()
 void Game::update(sf::Time)
 {
 	world.Step(timeStep, velocityIterations, positionIterations);
-
-
-	
-
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
-	{
-		moveRight(playerBody);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
-	{
-		moveLeft(playerBody);
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
-	{
-		if (m_jumpTimer > 0)
-		{
-			return;
-		}
-		else
-		{
-			moveUp(playerBody);
-		
-			m_jumpTimer = 100;
-		}
-		
-	}
-
-
-	
-		m_jumpTimer--;
-	
-
-	
-
-	updateSprite();
+	player.updateSprite();
 }
 
 void Game::render()
@@ -118,9 +78,7 @@ void Game::render()
 
 	m_window.draw(ground);
 
-	m_window.draw(m_sprite);
-
-
+	player.render(m_window);
 
 	world.DrawDebugData();
 
@@ -130,24 +88,6 @@ void Game::render()
 
 
 
-
-void Game::createBoxPlayer()
-{
-	//************
-	//When dividing the SetAsBox by scale you MUST multiply GetPosition() by SCALE
-	//************
-	bodyDef.position = b2Vec2(300 / SCALE , 500 / SCALE );
-	bodyDef.type = b2_dynamicBody;
-	playerBody = world.CreateBody(&bodyDef);
-
-	shape.SetAsBox((32.f / 2) / SCALE, (32.f / 2) / SCALE);
-	fixtureDef.density = 1.0f;
-	fixtureDef.friction = 0.7f;
-	fixtureDef.shape = &shape;
-	playerBody->CreateFixture(&fixtureDef);
-
-
-}
 
 void Game::groundBox()
 {
@@ -166,44 +106,16 @@ void Game::groundBox()
 }
 
 
-void Game::createSprite()
-{
-	m_sprite.setTexture(boxTexture);
-	m_sprite.setOrigin(16.f, 16.f);
-	//m_sprite.scale(0.5, 0.5);
-	m_sprite.setPosition(playerBody->GetPosition().x * SCALE, playerBody->GetPosition().y*SCALE);
-}
 
-void Game::updateSprite()
-{
-	m_sprite.setPosition(playerBody->GetPosition().x * SCALE, playerBody->GetPosition().y * SCALE);
-	m_sprite.setRotation(playerBody->GetAngle() * 180 / b2_pi);
-}
 
 void Game::createGround()
 {
-
 	ground.setTexture(GroundTexture);
 	ground.setOrigin(400.f, 8.f);
 	ground.setPosition(groundBody->GetPosition().x*SCALE, groundBody->GetPosition().y*SCALE);
 }
 
-void Game::moveRight(b2Body * body)
-{
-	body->ApplyLinearImpulse(b2Vec2(0.4, 0), body->GetWorldCenter(), true);
-}
 
-void Game::moveLeft(b2Body * body)
-{
-	body->ApplyLinearImpulse(b2Vec2(-0.4, 0), body->GetWorldCenter(), true);
-
-}
-
-void Game::moveUp(b2Body * body)
-{
-	body->ApplyLinearImpulse(b2Vec2(0, -15), body->GetWorldCenter(), true);
-
-}
 
 
 
